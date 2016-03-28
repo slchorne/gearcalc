@@ -11,8 +11,8 @@ myApp.controller('myController', function($scope,$filter) {
     $scope.errors = [];
 
     // testing
-    $scope.form.front = "44,32,22";
-    $scope.form.rear = "11,13,15,17,20,23,26,30,34";
+    $scope.form.front = "52,42";
+    $scope.form.rear = "11,13";
 
     // some lookuptables
     var gearColors = [
