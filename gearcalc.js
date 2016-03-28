@@ -84,8 +84,6 @@ myApp.controller('myController', function($scope,$filter) {
 
         // console.log ( 'maxidx', fMaxIdx , rMaxIdx );
 
-
-
         // now sort the array
         var sorted = $filter('orderBy')( gearData,'+ratio' , $scope.form.reverse );
 
@@ -98,25 +96,38 @@ myApp.controller('myController', function($scope,$filter) {
         var lastRatio ;
         var fLast ;
         var rLast ;
+
+
         angular.forEach(sorted, function(rec,idx){
 
             // look for crossed chains
+            // for REAR 1 == high/small
+            // for FRONT 1 == Low/small
+            // don't go more than N sprockets past the edge
+            // assume 6
             var isCrossed = 0 ;
-            if ( rec.fidx == 1  && rec.ridx <= 4 ) {
+
+            if ( rec.fidx == 1  && rec.ridx <= ( rMaxIdx - 5)) {
                 // f-low r-high
                 isCrossed ++ ;
             }
+
             if ( rec.fidx == 2  && rec.ridx >= rMaxIdx - 1 ) {
+                // middle or high ring,
+                // just skip 2 lowest gears
                 // f-high r-low
                 isCrossed ++ ;
             }
-            if ( fMaxIdx == 3 &&
-                rec.fidx == 2  && rec.ridx <= 2 ) {
-                // front group has 3 gears
+
+            if ( rec.fidx == 2 &&
+                fMaxIdx == 3  && rec.ridx <= 3 ) {
+                // middle ring 3 speed front groupset
                 // f-mid, r-high
                 isCrossed ++ ;
             }
+
             if ( rec.fidx == 3  && rec.ridx >= rMaxIdx - 2 ) {
+                // 3 speed front groupset,
                 // f-high r-low
                 isCrossed ++ ;
             }
