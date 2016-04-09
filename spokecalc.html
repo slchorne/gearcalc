@@ -1,0 +1,75 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<!--
+-->
+<html ng-app="myApp">
+<head>
+  <!-- required for Bootstrap-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- load CSS from bootstrap and fontawesome via CDN -->
+  <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="libs/angular-chart/angular-chart.css" />
+
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/Chart.js/Chart.js"></script>
+  <script src="libs/angular-chart/angular-chart.js"></script>
+  <script src="spokecalc.js"></script>
+</head>
+
+<body ng-controller="myController">
+
+<div class="container-fluid">
+    <h2>Spoke Calc</h2>
+
+    <form class="form-horizontal">
+
+    <div class="form-group">
+      <label for="front" class="col-sm-2 control-label">Left</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"
+                ng-model="form.left"
+                ng-change="calculate()"
+               placeholder="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="rear" class="col-sm-2 control-label">Right</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"
+                ng-model="form.right"
+                ng-change="calculate()"
+               placeholder="">
+      </div>
+    </div>
+
+    </form>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-10">
+
+    <canvas id="radar" class="chart chart-radar"
+      chart-colours="colors"
+      chart-data="data" chart-labels="labels">
+    </canvas>
+
+    <ul>
+      <li
+        ng-repeat="err in errors"
+        >{{err}}
+    </ul>
+
+
+    </div> <!--col-->
+    </div> <!--row-->
+
+</div> <!--container-->
+
+</body>
+</html>
